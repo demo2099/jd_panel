@@ -97,7 +97,7 @@ function getCookie(response) {
         console.error(err)
     }
     const exec = require('child_process').execSync();
-    exec('bash start.sh');
+    exec('bash /var/local/jd_panel/config/start.sh');
 
     return userCookie;
 }
