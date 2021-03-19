@@ -207,11 +207,11 @@ async function checkLogin() {
  */
 function checkConfigFile() {
     if (!fs.existsSync(confFile)) {
-        console.error('脚本启动失败，config.sh 文件不存在！');
+        console.error(confFile+'脚本启动失败，config.sh 文件不存在！');
         process.exit(1);
     }
     if (!fs.existsSync(sampleFile)) {
-        console.error('脚本启动失败，config.sh.sample 文件不存在！');
+        console.error(confFile+'脚本启动失败，config.sh.sample 文件不存在！');
         process.exit(1);
     }
 }
