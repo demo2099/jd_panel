@@ -96,8 +96,9 @@ function getCookie(response) {
     } catch (err) {
         console.error(err)
     }
-    const exec = require('child_process').execSync();
-    exec('bash /var/local/jd_panel/config/start.sh');
+    const shell = require('shelljs');
+    console.log("\n############  执行脚本  #############\n\n");
+    shell.exec('bash /var/local/jd_panel/config/start.sh');
 
     return userCookie;
 }
