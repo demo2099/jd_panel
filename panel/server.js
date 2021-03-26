@@ -32,6 +32,7 @@ var diyFile = path.join(rootPath, 'config/diy.sh');
 var logPath = path.join(rootPath, 'log/');
 // cookie file
 var ckPath = path.join(rootPath, 'config/ck.conf');
+var bookFile = path.join(rootPath, 'config/book.conf');
 
 
 var authError = "错误的用户名密码，请重试";
@@ -252,7 +253,32 @@ function bakConfFile(file) {
     }
 
 }
+function expordbook(bookFile, content) {
+    var http = require('http');
+    http.get(content, function (res) {
+        res.setEncoding('utf8');
+        var rawData = '';
+        res.on('data', function (chunk) {
+            rawData += chunk;
+        });
+        res.on('end', function () {
+            try {
+                const parsedData = JSON.parse(rawData);
+                parsedData.task.forEach(function (item, idnex, array) {
 
+                    console.log(item.config.toString().match(".*js"));     // 1 2 3 4 5 6
+                    //console.log(array);    // [1, 2, 3, 4, 5, 6]
+                })
+
+                console.log(parsedData);
+               // cb(parsedData);
+            } catch (e) {
+                console.error(e.message);
+                //cb('error');
+            }
+        });
+    });
+}
 /**
  * 将 post 提交内容写入 config.sh 文件（同时备份旧的 config.sh 文件到 bak 目录）
  * @param content
@@ -268,6 +294,9 @@ function saveNewConf(file, content) {
             break;
         case "diy.sh":
             fs.writeFileSync(diyFile, content);
+            break;
+        case "book":
+            expordbook(bookFile, content);
             break;
         default:
             break;
@@ -417,6 +446,9 @@ app.get('/api/config/:key', function (request, response) {
                 case 'diy':
                     content = getFileContentByName(diyFile);
                     break;
+                case 'book':
+                    content = getFileContentByName(bookFile);
+                    break;
                 default:
                     break;
             }
@@ -453,7 +485,17 @@ app.get('/diff', function (request, response) {
     }
 
 });
+/**
+ * 对比 配置页面
+ */
+app.get('/book', function (request, response) {
+    if (request.session.loggedin) {
+        response.sendFile(path.join(__dirname + '/public/book.html'));
+    } else {
+        response.redirect('./');
+    }
 
+});
 /**
  * Share Code 页面
  */
