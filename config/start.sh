@@ -17,3 +17,7 @@ for(( i=0;i<${#ckArray[@]};i++)) do
 	cd ../
 	rm -rf jd_scripts$i
 done;
+#npm install
+#npm install --save shelljs
+#npm install request
+#npm install request-promise
