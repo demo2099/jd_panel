@@ -291,16 +291,12 @@ async function expordbook(bookFile, content) {
         const parsedData = JSON.parse(rpbody);
         console.log("匹配到的 数据xxx：" , parsedData);
         parsedData.task.forEach(function (item, idnex, array) {
-            console.log("匹配到的 数据yyy：" , item);
+           // console.log("匹配到的 数据yyy：" , item);
             var crontext ="";
-            if(item.toString().includes("config")){
-                console.log(item.config.toString().match(".*\\.js")[0]);// 1 2 3 4 5 6
-                 crontext = item.config.toString().match(".*\\.js")[0];
 
-            }else {
-                console.log("匹配到的 数据：" , item.toString().match(".*\\.js"));
-                crontext = item.toString().match(".*\\.js")[0];
-            }
+               // console.log("匹配到的 数据：" , item.toString().match(".*\\.js"));
+                crontext = item.toString().match("\\d.*\\.js")[0];
+
 
 
             myMap.set(crontext.replace(/http.*/g, ""), crontext.match("http.*")[0]);
