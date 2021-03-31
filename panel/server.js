@@ -289,6 +289,7 @@ async function expordbook(bookFile, content) {
         let rpbody = await rp(options);
         //console.log("rpnbody" , rpbody );
         const parsedData = JSON.parse(rpbody);
+        console.log("匹配到的 数据xxx：" , parsedData);
         parsedData.task.forEach(function (item, idnex, array) {
             var crontext ="";
             if(item.toString().includes("config")){
