@@ -291,10 +291,10 @@ async function expordbook(bookFile, content) {
         const parsedData = JSON.parse(rpbody);
         console.log("匹配到的 数据xxx：" , parsedData);
         parsedData.task.forEach(function (item, idnex, array) {
-            console.log("匹配到的 数据yyy：" , item.toString().replace(/[\r\n]/g,"").trim());
+            console.log("匹配到的 数据yyy：" , item.toString().replace(/[\r,\n]/g,"").trim());
             var crontext ="";
 
-                console.log("匹配到的 数据：" , item.toString().replace(/[\r\n]/g,"").trim().match("\\d.*\\.js"));
+                console.log("匹配到的 数据：" , item.toString().replace(/[\r,\n]/g,"").trim().match("\\d.*\\.js"));
                 crontext = item.toString().replace(/[\r\n]/g,"").trim().match("\\d.*\\.js")[0];
 
 
