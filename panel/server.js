@@ -292,7 +292,7 @@ async function expordbook(bookFile, content) {
         console.log("匹配到的 数据xxx：" , parsedData);
         parsedData.task.forEach(function (item, idnex, array) {
             var crontext ="";
-                if(Object.prototype.toString.call(obj) === '[object Object]'){
+                if(Object.prototype.toString.call(item) === '[object Object]'){
                     console.log("匹配到的 数据yyy：" , item.config);
                     console.log("匹配到的 数据：" , item.toString().trim().match("\\d.*\\.js"));
                     crontext = item.config.toString().trim().match("\\d.*\\.js")[0];
