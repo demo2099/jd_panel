@@ -38,7 +38,7 @@ var bookFile = path.join(rootPath, 'config/book.conf');
 var authError = "错误的用户名密码，请重试";
 var loginFaild = "请先登录!";
 
-var configString = "config sample crontab shareCode diy book";
+var configString = "config sample crontab shareCode diy book download";
 
 var s_token, cookies, guid, lsid, lstoken, okl_token, token, userCookie = ""
 
@@ -377,6 +377,10 @@ function saveNewConf(file, content) {
         case "book":
             expordbook(bookFile, content);
             break;
+        case "download":
+            expordbook(cronjsfile, content);
+            break;
+
         default:
             break;
     }
@@ -528,6 +532,9 @@ app.get('/api/config/:key', function (request, response) {
                 case 'book':
                     content = getFileContentByName(bookFile);
                     break;
+                case 'download':
+                    content = getFileContentByName(cronjsfile);
+                    break;
                 default:
                     break;
             }
@@ -570,6 +577,14 @@ app.get('/diff', function (request, response) {
 app.get('/book', function (request, response) {
     if (request.session.loggedin) {
         response.sendFile(path.join(__dirname + '/public/book.html'));
+    } else {
+        response.redirect('./');
+    }
+
+});
+app.get('/download', function (request, response) {
+    if (request.session.loggedin) {
+        response.sendFile(path.join(__dirname + '/public/download.html'));
     } else {
         response.redirect('./');
     }

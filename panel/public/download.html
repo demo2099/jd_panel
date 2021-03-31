@@ -34,17 +34,17 @@
             </nav>
             <header>
                 <h1>在线编辑工具</h1>
-                <button id="save" title="保存">保存 crontab.list</button>
+                <button id="save" title="保存">保存</button>
             </header>
             <h4>crontab.list</h4>
             <div class="wrapper">
-                <textarea id="code" name="code"></textarea>
+                <textarea id="download" name="download"></textarea>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function () {
-            var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            var editor = CodeMirror.fromTextArea(document.getElementById("download"), {
                 lineNumbers: true,
                 lineWrapping: true,
                 styleActiveLine: true,
@@ -53,14 +53,14 @@
                 theme: 'dracula'
             });
             let timeStamp = (new Date()).getTime()
-            $.get("./api/config/crontab?t="+timeStamp, function (data) {
+            $.get("./api/config/download?t="+timeStamp, function (data) {
                 editor.setValue(data);
             });
 
             $('#save').click(function () {
                 var confContent = editor.getValue();
                 let timeStamp = (new Date()).getTime()
-                $.post('./api/save?t='+timeStamp, { content: confContent, name: "crontab.list" }, function (data) {
+                $.post('./api/save?t='+timeStamp, { content: confContent, name: "download" }, function (data) {
                     let icon = (data.err == 0) ? "success" : "error"
                     Swal.fire({
                         title:data.title,
