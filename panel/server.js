@@ -378,7 +378,7 @@ function saveNewConf(file, content) {
             expordbook(bookFile, content);
             break;
         case "download":
-            expordbook(cronjsfile, content);
+            fs.writeFileSync(cronjsfile, content);
             break;
 
         default:
