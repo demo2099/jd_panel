@@ -296,6 +296,7 @@ async function expordbook(bookFile, content) {
                  crontext = item.config.toString().match(".*\\.js")[0];
 
             }else {
+                console.log("匹配到的 数据：" , item.toString().match(".*\\.js"));
                 crontext = item.toString().match(".*\\.js")[0];
             }
 

@@ -21,3 +21,4 @@ done;
 #npm install --save shelljs
 #npm install request
 #npm install request-promise
+#/usr/local/bin/node  server.js
