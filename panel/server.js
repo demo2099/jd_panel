@@ -288,18 +288,20 @@ async function expordbook(bookFile, content) {
 
 
     for (urlo in urlarry) {
-        // 请求例子
-        const rp = require('request-promise');
-        let options = {
-            method: 'GET',
-            uri: urlarry[urlo].replace(/https/g, "http")
-        };
-        let rpbody = await rp(options);
-        //console.log("rpnbody" , rpbody );
-        const parsedData = JSON.parse(rpbody);
-        console.log("匹配到的 数据xxx：" , parsedData);
-        parsedData.task.forEach(function (item, idnex, array) {
-            var crontext ="";
+        //20210401判断
+        if(!urlarry[urlo].toString().includes("*")){
+            // 请求例子
+            const rp = require('request-promise');
+            let options = {
+                method: 'GET',
+                uri: urlarry[urlo].replace(/https/g, "http")
+            };
+            let rpbody = await rp(options);
+            //console.log("rpnbody" , rpbody );
+            const parsedData = JSON.parse(rpbody);
+            console.log("匹配到的 数据xxx：" , parsedData);
+            parsedData.task.forEach(function (item, idnex, array) {
+                var crontext ="";
                 if(Object.prototype.toString.call(item) === '[object Object]'){
                     console.log("匹配到的 数据yyy：" , item.config);
                     console.log("匹配到的 数据：" , item.toString().trim().match("\\d.*\\.js"));
@@ -312,10 +314,14 @@ async function expordbook(bookFile, content) {
 
 
 
-            myMap.set(crontext.replace(/http.*/g, ""), crontext.match("http.*")[0]);
+                myMap.set(crontext.replace(/http.*/g, ""), crontext.match("http.*")[0]);
 
-            //console.log(array);    // [1, 2, 3, 4, 5, 6]
-        })
+                //console.log(array);    // [1, 2, 3, 4, 5, 6]
+            })
+        }else {
+            myMap.set(urlarry[urlo].replace(/http.*/g, ""), urlarry[urlo].match("http.*")[0]);
+        }
+
         /*    http.get(urlarry[urlo].replace(/https/g, "http"), function (res) {
                res.setEncoding('utf8');
                var rawData = '';

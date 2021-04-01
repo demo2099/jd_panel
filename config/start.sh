@@ -21,4 +21,12 @@ done;
 #npm install --save shelljs
 #npm install request
 #npm install request-promise
-#/usr/local/bin/node  server.js
+#npm install node-schedule
+
+#/usr/local/bin/node  /var/local/jd_panel/panel/server.js
+#rm -rf /var/local/jdhelper/other/*
+#cp /var/local/jd_panel/config/cronjsfile.sh /var/local/jdhelper/other
+#sh /var/local/jdhelper/other/cronjsfile.sh
+#rm -f /var/local/jdhelper/other/cronjsfile.sh
+
+
