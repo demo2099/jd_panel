@@ -339,7 +339,7 @@ async function expordbook(bookFile, content) {
     for (var item of myMap.entries()) {
         console.log(item[0] + " = " + item[1]);
         var cron = item[0] + " " + "node /scripts/" + item[1].toString().match("\\w+\\.js")[0];
-        var cronjsget = "wget  -O  " + item[1];
+        var cronjsget = "wget  -N  " + item[1];
         cronSet.add(cron);
         cronjsgetSet.add(cronjsget);
     }
