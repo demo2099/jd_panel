@@ -42,6 +42,14 @@ var configString = "config sample crontab shareCode diy book download";
 
 var s_token, cookies, guid, lsid, lstoken, okl_token, token, userCookie = ""
 
+//定时任务
+const schedule = require('node-schedule');
+
+const job = schedule.scheduleJob('42 12 7 * * *', function(){
+    expordbook(bookFile, getFileContentByName(bookFile));
+    console.log('everyday update!');
+});
+
 function praseSetCookies(response) {
     s_token = response.body.s_token
     guid = response.headers['set-cookie'][0]
